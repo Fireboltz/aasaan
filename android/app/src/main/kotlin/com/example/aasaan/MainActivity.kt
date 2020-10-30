@@ -1,4 +1,4 @@
-package com.example.scanbot_sdk_example_flutter
+package com.example.aasaan
 
 import io.flutter.embedding.android.FlutterActivity
 
