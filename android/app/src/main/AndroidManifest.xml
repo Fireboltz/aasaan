@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.scanbot_sdk_example_flutter">
+    package="com.example.aasaan">
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -13,7 +13,7 @@
     <application
         android:largeHeap="true"
         android:requestLegacyExternalStorage="true"
-        android:label="Scanbot SDK Example Flutter"
+        android:label="Aasaan"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

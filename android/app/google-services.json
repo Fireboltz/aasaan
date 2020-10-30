@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "68244373835",
+    "firebase_url": "https://aasaan-187e2.firebaseio.com",
+    "project_id": "aasaan-187e2",
+    "storage_bucket": "aasaan-187e2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:68244373835:android:df5627897fc934acd6e8ce",
+        "android_client_info": {
+          "package_name": "com.example.aasaan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "68244373835-m5hqh53qmvblu0fdvetua1l5uapkovi3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBpxmZGt0WIA72cPbM7sXikk-SqLP895Nc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "68244373835-m5hqh53qmvblu0fdvetua1l5uapkovi3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
