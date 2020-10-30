@@ -40,7 +40,7 @@ android {
     defaultConfig {
         // Application ID - see https://developer.android.com/studio/build/application-id.html
         applicationId "io.scanbot.example.sdk.flutter"
-        minSdkVersion 21
+        minSdkVersion 19
         targetSdkVersion 29
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
