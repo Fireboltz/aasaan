@@ -22,21 +22,21 @@ import 'package:image_picker/image_picker.dart';
 
 void main() => runApp(MyApp());
 
-const SCANBOT_SDK_LICENSE_KEY = "cvBZ7Ky287hBryYhsX4bTfu1J/6sH7" +
-    "2Pw8XCeaCXdaaI/gvjZkSm4SHiYcXB" +
-    "KN4zpI/YzGyXQGAurHkEQlEpXKvHwl" +
-    "lDScpJa9LFdCLLEJl2atVg0Bcy/btq" +
-    "jb5iipqvBD7F41X5S1CoI4bkEtISpD" +
-    "pmICnosRVC7S6xrJ8V7in0zbhhP059" +
-    "dpKGx/UCFFbRb7fn7ejFnlDwLU58RT" +
-    "3JfwHT48D2gs1iU2UYPfUX9yj2ioSN" +
-    "6Duah5sdF5DrXMvc0+TcQFd2fsJErH" +
-    "XDHPECQEjvM+6jbYYXC4FfiAPJCwCQ" +
-    "qOhbFKsGB4ikdtRMvEAtkuzbNoFOUo" +
-    "mmOXpukYnEww==\nU2NhbmJvdFNESw" +
-    "ppby5zY2FuYm90LmV4YW1wbGUuc2Rr" +
-    "LmZsdXR0ZXIKMTYwNjc4MDc5OQo1OT" +
-    "AKMw==\n";
+const SCANBOT_SDK_LICENSE_KEY =   "OKrw3WYY6sSqn1988qBvNx7ysqB+2t" +
+    "gqE9dRCLQCp4rbHI3yQKIZhYvNzpcV" +
+    "dottRDWpCqWfBeD2AoHqInqwMhGuUH" +
+    "boGprarcbTIyZIeMOrNnzU0OoZoAFG" +
+    "SVOlAuo6WDloNiD2yIkWwZo54qFwwC" +
+    "fFLaigqHC/4cK3YpnvoWBkzb9uO+Dy" +
+    "o8Jx4zMKgmGlG57ISWeZsKWyEuwPV1" +
+    "uuVfv2sZCn6WHQTBbPOtV9R1N0cgnz" +
+    "IFINSKqKPpqyEEdYmCtV8OzkR/M9pV" +
+    "W88Oy/I4rwxsWOObUUpOvPqTARQ3w4" +
+    "HC7ozrxijk86is14C7/UKo2+oOXfpe" +
+    "iCeuY3ieFVMw==\nU2NhbmJvdFNESw" +
+    "pjb20uZXhhbXBsZS5hYXNhYW4KMTYw" +
+    "Njc4MDc5OQo1OTAKMw==\n";
+
 
 initScanbotSdk() async {
   // Consider adjusting this optional storageBaseDirectory - see the comments below.
@@ -144,7 +144,7 @@ class _MainPageWidgetState extends State<MainPageWidget> {
                       shape: CircleBorder(),
                       child: RaisedButton(
                         elevation: 10,
-                        child: Icon(Icons.photo_camera_rounded,
+                        child: Icon(Icons.camera_alt,
                         size: 55,
                         color:  hex('#f6e049'),),
                         onPressed: () => startDocumentScanning(),
