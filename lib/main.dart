@@ -13,9 +13,9 @@ import 'package:scanbot_sdk/mrz_scanning_data.dart';
 import 'package:scanbot_sdk/scanbot_sdk.dart';
 import 'package:scanbot_sdk/scanbot_sdk_models.dart';
 import 'package:scanbot_sdk/scanbot_sdk_ui.dart';
+import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 import 'pages_repository.dart';
-import 'ui/menu_items.dart';
 import 'ui/utils.dart';
 
 import 'package:image_picker/image_picker.dart';
@@ -120,56 +120,144 @@ class MainPageWidget extends StatefulWidget {
 
 class _MainPageWidgetState extends State<MainPageWidget> {
   PageRepository _pageRepository = PageRepository();
+  IconData panelIcon = Icons.keyboard_arrow_up;
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: hex('#f6e049'),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Image(
-              image: AssetImage('img/doc.png'),
-            ),
-            SizedBox(height: 30,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+          backgroundColor: hex('#f6e049'),
+          body: SlidingUpPanel(
+            minHeight: 150,
+            maxHeight: MediaQuery. of(context).size.height*0.55,
+            borderRadius: BorderRadius.circular(10),
+            onPanelClosed: (){
+              panelIcon = Icons.keyboard_arrow_up;
+              setState(() {
+              });
+            },
+            onPanelOpened: (){
+              panelIcon = Icons.keyboard_arrow_down;
+              setState(() {
+              });
+              },
+            panel: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Column(
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Icon(
+                    panelIcon,
+                    size: 30,
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     ButtonTheme(
-                      minWidth: 100,
-                      height: 100,
+                      height: 80,
                       shape: CircleBorder(),
                       child: RaisedButton(
                         elevation: 10,
-                        child: Icon(Icons.photo_camera_rounded,
-                        size: 55,
-                        color:  hex('#f6e049'),),
+                        child: Icon(
+                          Icons.photo_camera_rounded,
+                          size: 40,
+                          color: hex('#f6e049'),
+                        ),
                         onPressed: () => startDocumentScanning(),
+                        color: hex('#383A48'),
+                      ),
+                    ),
+                    ButtonTheme(
+                      minWidth: 60,
+                      height: 60,
+                      shape: CircleBorder(),
+                      child: RaisedButton(
+                        elevation: 10,
+                        child: Icon(
+                          Icons.filter,
+                          size: 20,
+                          color: hex('#f6e049'),
+                        ),
+                        onPressed: () => importImage(),
                         color: hex('#383A48'),
                       ),
                     ),
                   ],
                 ),
-                ButtonTheme(
-                  minWidth: 60,
-                  height: 60,
-                  shape: CircleBorder(),
-                  child: RaisedButton(
-                    elevation: 10,
-                    child: Icon(Icons.filter,
-                      size: 20,
-                      color:  hex('#f6e049'),),
-                    onPressed: () => importImage(),
-                    color: hex('#383A48'),
+                SizedBox(
+                  height: 30,
+                ),
+                InkWell(
+                  onTap: () => gotoImagesView(),
+                  child: Container(
+                    width: MediaQuery. of(context).size.width * 0.9,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      color: hex('#f6e049'),
+                      borderRadius: BorderRadius.circular(10)
+                    ),
+                    child: Center(
+                      child: Text(
+                        'VIEW RESULTS'
+                      ),
+                    ),
                   ),
                 ),
+                SizedBox(
+                  height: 20,
+                ),
+                InkWell(
+                  onTap: () => startBarcodeScanner(),
+                  child: Container(
+                    width: MediaQuery. of(context).size.width * 0.9,
+                    height: 50,
+                    decoration: BoxDecoration(
+                        color: hex('#f6e049'),
+                        borderRadius: BorderRadius.circular(10)
+                    ),
+                    child: Center(
+                      child: Text(
+                          'BARCODE SCANNER'
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                InkWell(
+                  onTap: () => startQRScanner(),
+                  child: Container(
+                    width: MediaQuery. of(context).size.width * 0.9,
+                    height: 50,
+                    decoration: BoxDecoration(
+                        color: hex('#f6e049'),
+                        borderRadius: BorderRadius.circular(10)
+                    ),
+                    child: Center(
+                      child: Text(
+                          'QR SCANNER'
+                      ),
+                    ),
+                  ),
+                )
+
               ],
-            )
-          ],
-        ),
+            ),
+            body: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Image(
+                  image: AssetImage('img/doc.png'),
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+              ],
+            ),
+          )
       ),
     );
   }
