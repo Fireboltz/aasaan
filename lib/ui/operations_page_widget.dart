@@ -27,6 +27,17 @@ class PageOperations extends StatelessWidget {
           backgroundColor: Colors.white,
           title: const Text('Image Preview',
               style: TextStyle(inherit: true, color: Colors.black)),
+          actions: <Widget>[
+            Padding(
+                padding: EdgeInsets.only(right: 20.0),
+                child: GestureDetector(
+                  onTap: () {},
+                  child: Icon(
+                      Icons.compress
+                  ),
+                )
+            ),
+          ],
         ),
         body: PagesPreviewWidget(_page, _pageRepository));
   }
@@ -159,7 +170,16 @@ class PagesPreviewWidgetState extends State<PagesPreviewWidget> {
       _updatePage(resultPage);
     }
   }
+  startCompressingScreen(c.Page page) async {
+    if (!await checkLicenseStatus(context)) { return; }
 
+    try {
+
+    }
+    catch(e){
+      print(e);
+    }
+  }
   startCroppingScreen(c.Page page) async {
     if (!await checkLicenseStatus(context)) { return; }
 
