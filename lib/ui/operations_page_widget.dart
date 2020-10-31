@@ -5,6 +5,7 @@ import 'package:scanbot_sdk/cropping_screen_data.dart';
 import 'package:scanbot_sdk/scanbot_sdk.dart';
 import 'package:scanbot_sdk/scanbot_sdk_ui.dart';
 import 'package:scanbot_sdk_example_flutter/ui/utils.dart';
+import 'package:scanbot_sdk_example_flutter/utils/compress_spinner.dart';
 import 'package:scanbot_sdk_example_flutter/utils/constants.dart';
 
 import '../pages_repository.dart';
@@ -66,31 +67,8 @@ class _PageOperationsState extends State<PageOperations> {
               width: 250.0,
               height: 75.0,
               child: Padding(
-                padding: const EdgeInsets.all(15),
-                child: DropdownButton(
-                  hint: _dropDownValue == null
-                      ? Text('Dropdown')
-                      : Text(
-                    _dropDownValue,
-                  ),
-                  isExpanded: true,
-                  iconSize: 30.0,
-                  items: ['0.9', '0.75', '0.5', '0.25'].map(
-                        (val) {
-                      return DropdownMenuItem<String>(
-                        value: val,
-                        child: Text(val),
-                      );
-                    },
-                  ).toList(),
-                  onChanged: (val) {
-                    setState(
-                          () {
-                        _dropDownValue = val;
-                      },
-                    );
-                  },
-                ),
+                padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                child: CompressSpinner(),
               ),
             ),
             actions: <Widget>[
@@ -99,7 +77,7 @@ class _PageOperationsState extends State<PageOperations> {
                 textColor: kPrimaryColor,
                 onPressed: () {
                   Navigator.pop(context);
-                  showProcessingDialog(context, "Compressing the File");
+                  showProcessingDialog(context, "Compressing File");
                 },
               ),
             ],
