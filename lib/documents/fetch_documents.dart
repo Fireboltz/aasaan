@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:scanbot_sdk_example_flutter/utils/constants.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 void main() {
@@ -28,10 +31,12 @@ class FetchDocumentsState extends State<FetchDocuments> {
       "https://avatars1.githubusercontent.com/u/48018942?v=4";
 
   FetchDocumentsState(this.appBarTitle);
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(title: Text(this.appBarTitle)),
       body: new Container(
           child: allData.length == 0
@@ -60,7 +65,8 @@ class FetchDocumentsState extends State<FetchDocuments> {
       var data = snap.value;
       allData.clear();
       for (var key in keys) {
-        DocumentModel d = new DocumentModel(data[key]['Name'], data[key]['PDF']);
+        DocumentModel d =
+            new DocumentModel(data[key]['Name'], data[key]['PDF']);
         allData.add(d);
       }
       setState(() {
@@ -103,7 +109,105 @@ class FetchDocumentsState extends State<FetchDocuments> {
       onTap: () {
         _launchURL(fileURL);
       },
+      onLongPress: () {
+        compress();
+      },
     );
+  }
+
+  String _dropDownValue ="0.8";
+
+  compress() {
+    return showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10.0))),
+            contentPadding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
+            title: Text("Compress the document"),
+            content: Container(
+              width: 250.0,
+              height: 75.0,
+              child: Padding(
+                padding: const EdgeInsets.all(15),
+                child: DropdownButton(
+                  hint: _dropDownValue == null
+                      ? Text('Dropdown')
+                      : Text(
+                    _dropDownValue,
+                  ),
+                  isExpanded: true,
+                  iconSize: 30.0,
+                  items: ['0.9', '0.75', '0.5', '0.25'].map(
+                        (val) {
+                      return DropdownMenuItem<String>(
+                        value: val,
+                        child: Text(val),
+                      );
+                    },
+                  ).toList(),
+                  onChanged: (val) {
+                    setState(
+                          () {
+                        _dropDownValue = val;
+                      },
+                    );
+                  },
+                ),
+              ),
+            ),
+            actions: <Widget>[
+              FlatButton(
+                child: Text("UPDATE"),
+                textColor: kPrimaryColor,
+                onPressed: () {
+                  Navigator.pop(context);
+                  showProcessingDialog(context, "Compressing the File");
+                  },
+              ),
+            ],
+          );
+        });
+  }
+
+
+  static void showProcessingDialog(BuildContext context, String message) async {
+    return showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (BuildContext context) {
+          Future.delayed(Duration(seconds: 3), () {
+            Navigator.of(context).pop(true);
+          });
+          return AlertDialog(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10.0))),
+              contentPadding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
+              content: Container(
+                  width: 250.0,
+                  height: 100.0,
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        SizedBox(width: 15),
+                        CircularProgressIndicator(
+                          valueColor:
+                          new AlwaysStoppedAnimation<Color>(kPrimaryColor),
+                        ),
+                        SizedBox(width: 15),
+                        Text(message,
+                            style: TextStyle(
+                                fontFamily: "OpenSans",
+                                color: Color(0xFF5B6978)))
+                      ])));
+        });
+  }
+
+
+  _createSnackBar() {
+    _scaffoldKey.currentState.showSnackBar(new SnackBar(content: new Text("File compressed")));
   }
 }
 
@@ -121,3 +225,4 @@ class DocumentModel {
 
   DocumentModel(this.fileURL, this.fileName);
 }
+
