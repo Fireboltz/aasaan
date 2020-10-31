@@ -23,6 +23,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:scanbot_sdk_example_flutter/main.dart';
 import 'package:scanbot_sdk_example_flutter/ui/sign_in.dart';
+import 'package:scanbot_sdk_example_flutter/utils/constants.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -36,30 +37,34 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Container(
         child: Center(
           child: Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              SizedBox.fromSize(
-                child:  Image.asset(
-                  'img/doc.png',
-                ),
-                size: Size(300.0, 400.0),
-              ),
-              SizedBox(height: 30),
+            children: [
+              SizedBox(height: 80,),
               Text(
-                'Event Name',
+                "AASAAN",
                 style: TextStyle(
-                  color: Colors.white,
-                  fontFamily: 'OpenSans',
-                  fontSize: 30.0,
+                  fontSize: 36,
+                  color: kPrimaryColor,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 60),
-              _googleSignInButton(),
+              Text(
+                "Scan karo, Upload karo",
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: 80,),
+              Image.asset(
+                'img/doc.png',
+                height: 300,
+                width: 400,
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              _googleSignInButton()
             ],
           ),
         ),
@@ -77,47 +82,39 @@ class _LoginPageState extends State<LoginPage> {
 
 
   Widget _googleSignInButton() {
-    return DecoratedBox(
-      decoration: BoxDecoration(
-          color: Colors.white, borderRadius: BorderRadius.circular(40)),
-      child: OutlineButton(
-        splashColor: Colors.grey,
-        color: Colors.white,
-        onPressed: () {
-          signInWithGoogle().whenComplete(() async {
-            if (await FirebaseAuth.instance.currentUser() != null) {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) {
-                    return MainPageWidget();
-                  },
-                ),
-              );
-            }
-          });
-        },
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
-        highlightElevation: 55,
-        borderSide: BorderSide(color: Colors.grey),
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Image(image: AssetImage("img/google_logo.png"), height: 35.0),
-              Padding(
-                padding: const EdgeInsets.only(left: 10),
-                child: Text(
-                  'Sign in with Google',
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.black,
-                  ),
-                ),
-              )
-            ],
-          ),
+    return InkWell(
+      onTap: () {
+        signInWithGoogle().whenComplete(() async {
+          if (await FirebaseAuth.instance.currentUser() != null) {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) {
+                  return MainPageWidget();
+                },
+              ),
+            );
+          }
+        });
+      },
+      child: Container(
+        width: MediaQuery. of(context).size.width * 0.9,
+        height: 50,
+        decoration: BoxDecoration(
+            color: kPrimaryColor,
+            borderRadius: BorderRadius.circular(10)
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset('img/google_logo.png',
+            width: 25,
+            height: 25),
+            SizedBox(width: 20,),
+            Text(
+              'SIGN IN',
+              style: TextStyle(color: kWhite, fontSize: 19),
+            ),
+          ],
         ),
       ),
     );

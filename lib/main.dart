@@ -144,7 +144,7 @@ class _MainPageWidgetState extends State<MainPageWidget> {
           body: SlidingUpPanel(
             color: Colors.grey[200],
             minHeight: 150,
-            maxHeight: MediaQuery. of(context).size.height*0.55,
+            maxHeight: MediaQuery. of(context).size.height*0.65,
             borderRadius: BorderRadius.circular(30),
             onPanelClosed: (){
               panelIcon = Icons.keyboard_arrow_up;
@@ -261,7 +261,7 @@ class _MainPageWidgetState extends State<MainPageWidget> {
                   ),
                 ),
                 SizedBox(
-                  height: 30,
+                  height: 20,
                 ),
                 InkWell(
                   onTap: () => gotoDocumentsView(),
