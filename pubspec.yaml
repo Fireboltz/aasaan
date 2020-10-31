@@ -30,6 +30,8 @@ dependencies:
   firebase_database: ^3.0.4
   firebase_storage: 3.0.8
   url_launcher: 4.0.0
+  firebase_auth: ^0.15.4
+  google_sign_in: ^4.1.1
 
 
 
