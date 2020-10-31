@@ -17,8 +17,9 @@ import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 import 'pages_repository.dart';
 import 'ui/utils.dart';
-
+import 'utils/size_config.dart';
 import 'package:image_picker/image_picker.dart';
+import 'utils/constants.dart';
 
 void main() => runApp(MyApp());
 
@@ -126,11 +127,12 @@ class _MainPageWidgetState extends State<MainPageWidget> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-          backgroundColor: hex('#f6e049'),
+          backgroundColor: kWhite,
           body: SlidingUpPanel(
+            color: Colors.grey[200],
             minHeight: 150,
             maxHeight: MediaQuery. of(context).size.height*0.55,
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(30),
             onPanelClosed: (){
               panelIcon = Icons.keyboard_arrow_up;
               setState(() {
@@ -161,10 +163,10 @@ class _MainPageWidgetState extends State<MainPageWidget> {
                       child: RaisedButton(
                         elevation: 10,
                         child: Icon(Icons.camera_alt,
-                        size: 55,
-                        color:  hex('#f6e049'),),
+                        size: 45,
+                        color:  kPrimaryColor,),
                         onPressed: () => startDocumentScanning(),
-                        color: hex('#383A48'),
+                        color: Colors.white,
                       ),
                     ),
                     ButtonTheme(
@@ -176,10 +178,10 @@ class _MainPageWidgetState extends State<MainPageWidget> {
                         child: Icon(
                           Icons.filter,
                           size: 20,
-                          color: hex('#f6e049'),
+                          color:kPrimaryColor,
                         ),
                         onPressed: () => importImage(),
-                        color: hex('#383A48'),
+                        color: kWhite,
                       ),
                     ),
                   ],
@@ -193,12 +195,13 @@ class _MainPageWidgetState extends State<MainPageWidget> {
                     width: MediaQuery. of(context).size.width * 0.9,
                     height: 50,
                     decoration: BoxDecoration(
-                      color: hex('#f6e049'),
+                      color: kPrimaryColor,
                       borderRadius: BorderRadius.circular(10)
                     ),
                     child: Center(
                       child: Text(
-                        'VIEW RESULTS'
+                        'VIEW RESULTS',
+                        style: TextStyle(color: kWhite, fontSize: 19),
                       ),
                     ),
                   ),
@@ -211,13 +214,15 @@ class _MainPageWidgetState extends State<MainPageWidget> {
                   child: Container(
                     width: MediaQuery. of(context).size.width * 0.9,
                     height: 50,
-                    decoration: BoxDecoration(
-                        color: hex('#f6e049'),
+                    decoration:BoxDecoration(
+                        color: kPrimaryColor,
                         borderRadius: BorderRadius.circular(10)
                     ),
                     child: Center(
                       child: Text(
-                          'BARCODE SCANNER'
+                          'BARCODE SCANNER',
+                        style: TextStyle(color: kWhite, fontSize: 19),
+
                       ),
                     ),
                   ),
@@ -231,12 +236,13 @@ class _MainPageWidgetState extends State<MainPageWidget> {
                     width: MediaQuery. of(context).size.width * 0.9,
                     height: 50,
                     decoration: BoxDecoration(
-                        color: hex('#f6e049'),
+                        color: kPrimaryColor,
                         borderRadius: BorderRadius.circular(10)
                     ),
                     child: Center(
                       child: Text(
-                          'QR SCANNER'
+                          'QR SCANNER',
+                          style: TextStyle(color: kWhite, fontSize: 19),
                       ),
                     ),
                   ),
@@ -245,10 +251,25 @@ class _MainPageWidgetState extends State<MainPageWidget> {
               ],
             ),
             body: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Image(
-                  image: AssetImage('img/doc.png'),
+                SizedBox(height: 80,),
+                Text(
+                  "AASAN",
+                  style: TextStyle(
+                    fontSize: 36,
+                    color: kPrimaryColor,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  "Scan karo, Upload karo",
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(height: 80,),
+                Image.asset(
+                  'img/doc.png',
+                  height: 300,
+                  width: 400,
                 ),
                 SizedBox(
                   height: 30,
@@ -465,7 +486,7 @@ class _MainPageWidgetState extends State<MainPageWidget> {
     HealthInsuranceCardRecognitionResult result;
     try {
       var config = HealthInsuranceScannerConfiguration(
-        topBarBackgroundColor: Colors.blue,
+        topBarBackgroundColor: kPrimaryColor,
         topBarButtonsColor: Colors.white70,
         // ...
       );
@@ -494,7 +515,7 @@ class _MainPageWidgetState extends State<MainPageWidget> {
     MrzScanningResult result;
     try {
       var config = MrzScannerConfiguration(
-        topBarBackgroundColor: Colors.blue,
+        topBarBackgroundColor: kPrimaryColor,
         // ...
       );
       result = await ScanbotSdkUi.startMrzScanner(config);
