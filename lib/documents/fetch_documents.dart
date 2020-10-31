@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
+import 'package:scanbot_sdk_example_flutter/utils/compress_spinner.dart';
 import 'package:scanbot_sdk_example_flutter/utils/constants.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -80,6 +82,7 @@ class FetchDocumentsState extends State<FetchDocuments> {
       child: new Card(
         elevation: 10.0,
         child: new Container(
+          width: MediaQuery. of(context).size.width * 0.9,
           padding: new EdgeInsets.all(20.0),
           child: Row(
             children: <Widget>[
@@ -99,9 +102,6 @@ class FetchDocumentsState extends State<FetchDocuments> {
                   ),
                 ],
               ),
-              SizedBox(
-                width: 100,
-              ),
             ],
           ),
         ),
@@ -115,7 +115,7 @@ class FetchDocumentsState extends State<FetchDocuments> {
     );
   }
 
-  String _dropDownValue ="0.8";
+  String _dropDownValue = '0.9';
 
   compress() {
     return showDialog(
@@ -128,34 +128,12 @@ class FetchDocumentsState extends State<FetchDocuments> {
             contentPadding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
             title: Text("Compress the document"),
             content: Container(
-              width: 250.0,
+              padding: EdgeInsets.symmetric(vertical: 12),
+              width: 200.0,
               height: 75.0,
               child: Padding(
-                padding: const EdgeInsets.all(15),
-                child: DropdownButton(
-                  hint: _dropDownValue == null
-                      ? Text('Dropdown')
-                      : Text(
-                    _dropDownValue,
-                  ),
-                  isExpanded: true,
-                  iconSize: 30.0,
-                  items: ['0.9', '0.75', '0.5', '0.25'].map(
-                        (val) {
-                      return DropdownMenuItem<String>(
-                        value: val,
-                        child: Text(val),
-                      );
-                    },
-                  ).toList(),
-                  onChanged: (val) {
-                    setState(
-                          () {
-                        _dropDownValue = val;
-                      },
-                    );
-                  },
-                ),
+                padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                child: CompressSpinner(),
               ),
             ),
             actions: <Widget>[
@@ -164,14 +142,13 @@ class FetchDocumentsState extends State<FetchDocuments> {
                 textColor: kPrimaryColor,
                 onPressed: () {
                   Navigator.pop(context);
-                  showProcessingDialog(context, "Compressing the File");
-                  },
+                  showProcessingDialog(context, "Compressing File");
+                },
               ),
             ],
           );
         });
   }
-
 
   static void showProcessingDialog(BuildContext context, String message) async {
     return showDialog(
@@ -194,7 +171,7 @@ class FetchDocumentsState extends State<FetchDocuments> {
                         SizedBox(width: 15),
                         CircularProgressIndicator(
                           valueColor:
-                          new AlwaysStoppedAnimation<Color>(kPrimaryColor),
+                              new AlwaysStoppedAnimation<Color>(kPrimaryColor),
                         ),
                         SizedBox(width: 15),
                         Text(message,
@@ -205,9 +182,9 @@ class FetchDocumentsState extends State<FetchDocuments> {
         });
   }
 
-
   _createSnackBar() {
-    _scaffoldKey.currentState.showSnackBar(new SnackBar(content: new Text("File compressed")));
+    _scaffoldKey.currentState
+        .showSnackBar(new SnackBar(content: new Text("File compressed")));
   }
 }
 
@@ -225,4 +202,3 @@ class DocumentModel {
 
   DocumentModel(this.fileURL, this.fileName);
 }
-

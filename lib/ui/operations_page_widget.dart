@@ -5,17 +5,24 @@ import 'package:scanbot_sdk/cropping_screen_data.dart';
 import 'package:scanbot_sdk/scanbot_sdk.dart';
 import 'package:scanbot_sdk/scanbot_sdk_ui.dart';
 import 'package:scanbot_sdk_example_flutter/ui/utils.dart';
+import 'package:scanbot_sdk_example_flutter/utils/compress_spinner.dart';
+import 'package:scanbot_sdk_example_flutter/utils/constants.dart';
 
 import '../pages_repository.dart';
 import 'filter_page_widget.dart';
 import 'pages_widget.dart';
 
-class PageOperations extends StatelessWidget {
+class PageOperations extends StatefulWidget {
   c.Page _page;
   final PageRepository _pageRepository;
 
   PageOperations(this._page, this._pageRepository);
 
+  @override
+  _PageOperationsState createState() => _PageOperationsState();
+}
+
+class _PageOperationsState extends State<PageOperations> {
   @override
   Widget build(BuildContext context) {
     imageCache.clear();
@@ -31,7 +38,9 @@ class PageOperations extends StatelessWidget {
             Padding(
                 padding: EdgeInsets.only(right: 20.0),
                 child: GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    compress(context);
+                  },
                   child: Icon(
                       Icons.compress
                   ),
@@ -39,7 +48,73 @@ class PageOperations extends StatelessWidget {
             ),
           ],
         ),
-        body: PagesPreviewWidget(_page, _pageRepository));
+        body: PagesPreviewWidget(widget._page, widget._pageRepository));
+  }
+
+  String _dropDownValue ="0.8";
+
+  compress(BuildContext context) {
+    return showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10.0))),
+            contentPadding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
+            title: Text("Compress the document"),
+            content: Container(
+              width: 250.0,
+              height: 75.0,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                child: CompressSpinner(),
+              ),
+            ),
+            actions: <Widget>[
+              FlatButton(
+                child: Text("UPDATE"),
+                textColor: kPrimaryColor,
+                onPressed: () {
+                  Navigator.pop(context);
+                  showProcessingDialog(context, "Compressing File");
+                },
+              ),
+            ],
+          );
+        });
+  }
+
+  static void showProcessingDialog(BuildContext context, String message) async {
+    return showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (BuildContext context) {
+          Future.delayed(Duration(seconds: 3), () {
+            Navigator.of(context).pop(true);
+          });
+          return AlertDialog(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10.0))),
+              contentPadding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
+              content: Container(
+                  width: 250.0,
+                  height: 100.0,
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        SizedBox(width: 15),
+                        CircularProgressIndicator(
+                          valueColor:
+                          new AlwaysStoppedAnimation<Color>(kPrimaryColor),
+                        ),
+                        SizedBox(width: 15),
+                        Text(message,
+                            style: TextStyle(
+                                fontFamily: "OpenSans",
+                                color: Color(0xFF5B6978)))
+                      ])));
+        });
   }
 }
 
