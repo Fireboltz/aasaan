@@ -29,6 +29,9 @@ dependencies:
   sliding_up_panel: ^1.0.2
   firebase_database: ^3.0.4
   firebase_storage: 3.0.8
+  url_launcher: 4.0.0
+
+
 
 dev_dependencies:
   flutter_test:

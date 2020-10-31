@@ -53,6 +53,8 @@ class PagesPreviewWidget extends StatefulWidget {
 class PagesPreviewWidgetState extends State<PagesPreviewWidget> {
   bool _isUploading = false;
   double _uploadProgress = 0.0;
+  GlobalKey<FormState> _key = new GlobalKey();
+  bool _autovalidate = false;
 
   List<c.Page> pages;
   final PageRepository _pageRepository;
@@ -406,10 +408,11 @@ class PagesPreviewWidgetState extends State<PagesPreviewWidget> {
   }
 
   void documentFileUpload(String str, DatabaseReference mainReference) {
-    var data = {
-      "PDF": str,
-    };
-    mainReference.child("Documents").child('pdf').set(data).then((v) {});
+      var data = {
+        "PDF": str,
+        "Name": "test"
+      };
+      mainReference.child("Documents").push().set(data).then((v) {});
   }
 
   importImage() async {

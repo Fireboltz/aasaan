@@ -19,6 +19,7 @@ import 'pages_repository.dart';
 import 'ui/utils.dart';
 import 'package:image_picker/image_picker.dart';
 import 'utils/constants.dart';
+import 'documents/fetch_documents.dart';
 
 void main() => runApp(MyApp());
 
@@ -245,8 +246,27 @@ class _MainPageWidgetState extends State<MainPageWidget> {
                       ),
                     ),
                   ),
-                )
-
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                InkWell(
+                  onTap: () => gotoDocumentsView(),
+                  child: Container(
+                    width: MediaQuery. of(context).size.width * 0.9,
+                    height: 50,
+                    decoration: BoxDecoration(
+                        color: kPrimaryColor,
+                        borderRadius: BorderRadius.circular(10)
+                    ),
+                    child: Center(
+                      child: Text(
+                        'All DOCUMENTS',
+                        style: TextStyle(color: kWhite, fontSize: 19),
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ),
             body: Column(
@@ -538,6 +558,12 @@ class _MainPageWidgetState extends State<MainPageWidget> {
     imageCache.clear();
     return await Navigator.of(context).push(
       MaterialPageRoute(builder: (context) => DocumentPreview(_pageRepository)),
+    );
+  }
+
+  gotoDocumentsView() async{
+    return await Navigator.of(context).push(
+      MaterialPageRoute(builder: (context) => FetchDocuments("Fetch Documents")),
     );
   }
 
