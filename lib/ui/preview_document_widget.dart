@@ -24,7 +24,6 @@ class DocumentPreview extends StatelessWidget {
   final PageRepository _pageRepository;
 
   DocumentPreview(this._pageRepository);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,6 +51,9 @@ class PagesPreviewWidget extends StatefulWidget {
 }
 
 class PagesPreviewWidgetState extends State<PagesPreviewWidget> {
+  bool _isUploading = false;
+  double _uploadProgress = 0.0;
+
   List<c.Page> pages;
   final PageRepository _pageRepository;
   int currentSelectedPage = 0;
@@ -167,7 +169,7 @@ class PagesPreviewWidgetState extends State<PagesPreviewWidget> {
                 ),
                 ListTile(
                   leading: new Icon(Icons.picture_as_pdf),
-                  title: new Text('Save as PDF'),
+                  title: new Text('Save as PDF and Upload'),
                   onTap: () {
                     Navigator.pop(context);
                     createPdf();
@@ -378,6 +380,25 @@ class PagesPreviewWidgetState extends State<PagesPreviewWidget> {
   Future savePdf(List<int> asset, String name) async {
     StorageReference reference = FirebaseStorage.instance.ref().child(name);
     StorageUploadTask uploadTask = reference.putData(asset);
+    var dialog = ProgressDialog(context,
+        type: ProgressDialogType.Download, isDismissible: false);
+    dialog.style(message: "Uploading PDF", progress: _uploadProgress,
+        progressWidget: CircularProgressIndicator(
+          value: _uploadProgress,
+        ));
+    uploadTask.events.listen((event) {
+      setState(() {
+        dialog.show();
+        _isUploading = true;
+        _uploadProgress = ((event.snapshot.bytesTransferred.toDouble() /
+            event.snapshot.totalByteCount.toDouble()) * 100).floorToDouble();
+        print('Uploading: $_uploadProgress %');
+      });
+    });
+    uploadTask.onComplete.then((snapshot) {
+      _isUploading = false;
+      dialog.hide();
+    });
     String url = await (await uploadTask.onComplete).ref.getDownloadURL();
     print(url);
     documentFileUpload(url, mainReference);
@@ -439,7 +460,7 @@ class PagesPreviewWidgetState extends State<PagesPreviewWidget> {
               ? TiffCompression.CCITT_T6
               : TiffCompression.ADOBE_DEFLATE));
       final Uri tiffFileUri =
-          await ScanbotSdk.createTiff(this._pageRepository.pages, options);
+      await ScanbotSdk.createTiff(this._pageRepository.pages, options);
       dialog.hide();
       showAlertDialog(context, tiffFileUri.toString(), title: "TIFF file URI");
     } catch (e) {

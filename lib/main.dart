@@ -17,7 +17,6 @@ import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 import 'pages_repository.dart';
 import 'ui/utils.dart';
-import 'utils/size_config.dart';
 import 'package:image_picker/image_picker.dart';
 import 'utils/constants.dart';
 
@@ -254,7 +253,7 @@ class _MainPageWidgetState extends State<MainPageWidget> {
               children: [
                 SizedBox(height: 80,),
                 Text(
-                  "AASAN",
+                  "AASAAN",
                   style: TextStyle(
                     fontSize: 36,
                     color: kPrimaryColor,
