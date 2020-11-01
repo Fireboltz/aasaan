@@ -18,10 +18,6 @@ ___
 * [React](https://reactjs.org/)
 
 ___
-## Vehicle Data and data which are used from Forms
-
-These informations are updated and documented well in the [Wiki Page](https://github.com/Fireboltz/NAV-FT/wiki)
-___
 ## What all aasan can do ? :thought_balloon:
 
 aasaan contains some of the features which will be helped to scan document and upload
