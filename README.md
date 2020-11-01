@@ -77,7 +77,22 @@ Open the **workspace**(!) `ios/Runner.xcworkspace` in Xcode and adjust the *Sign
 Then build and run the app in Xcode.
 
 ## Screenshots
-___
+
+<table border="0">
+  <tr>
+     <td><img src="https://user-images.githubusercontent.com/48018942/97796401-87ad6980-1c37-11eb-999a-5bbbfbb80221.png" width="300"></td>
+       <td><img src="https://user-images.githubusercontent.com/48018942/97796402-87ad6980-1c37-11eb-98d7-5540c22eac6e.png" width="300"></td>
+    <td><img src="https://user-images.githubusercontent.com/48018942/97796399-854b0f80-1c37-11eb-8782-ee63188f9dff.png" width="300"></td>
+
+
+  </tr>
+  <tr>
+    <td><img src="https://user-images.githubusercontent.com/48018942/97796400-8714d300-1c37-11eb-9033-330e57ad67e2.png" width="300"></td>
+    <td><img src="https://user-images.githubusercontent.com/48018942/97796403-88460000-1c37-11eb-94d6-087c6bb3fbf2.png" width="300"></td>
+    <td><img src="https://user-images.githubusercontent.com/48018942/97796404-88de9680-1c37-11eb-9859-ef2911c128fc.png" width="300"></td>
+  </tr>
+</table>
+
 ## Developers :information_desk_person:
 
 [Ajay Prabhakar](https://github.com/chromicle) \
