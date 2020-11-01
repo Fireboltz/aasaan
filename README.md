@@ -106,11 +106,11 @@ Then build and run the app in Xcode.
 [Puneeth chanda](https://github.com/puneeth2001) \
 [Ashwin Ramakrishnan](https://github.com/ashwinkey04) \
 [Akshay Praveen Nair](https://github.com/iammarco11) \
-[Nehal Nevle](https://github.com/Blackcipher101)
+[Nehal Nevle](https://github.com/Blackcipher101) \
 
-##Links
-Documentation: https://puneethchanda2001.gitbook.io/ieee-document-upload/
-app:   https://drive.google.com/file/d/1LvnG73RmuWN0S-9zanKL9a3L5JLGKSCt/view?usp=sharing
-Repo: https://github.com/Fireboltz/IEEE-Document-uploader
-Website: https://blissful-neumann-0ff4dd.netlify.app/
+## Links \
+Documentation: https://puneethchanda2001.gitbook.io/ieee-document-upload/ \
+app:   https://drive.google.com/file/d/1LvnG73RmuWN0S-9zanKL9a3L5JLGKSCt/view?usp=sharing \
+Repo: https://github.com/Fireboltz/IEEE-Document-uploader \
+Website: https://blissful-neumann-0ff4dd.netlify.app/ \
 
