@@ -18,30 +18,26 @@ ___
 * [React](https://reactjs.org/)
 
 ___
-## Vehicle Data and data which are used from Forms
-
-These informations are updated and documented well in the [Wiki Page](https://github.com/Fireboltz/NAV-FT/wiki)
-___
 ## What all aasan can do ? :thought_balloon:
 
 aasaan contains some of the features which will be helped to scan document and upload
 
-**Scanning UI**
+**Scanning UI** \
 User guidance to the best position for capturing the document with manual + automatic photo capture of document
 
-**Pre-Processing of images**
+**Pre-Processing of images** \
 By scanning the document it will automatically process the image and give you readable douments with multipule filters
 
-**Perspective Correction**
+**Perspective Correction** \
 4 Point getPerspective Transform, it will automatically detect crop the image
 
-**Text Recognition (OCR)**
+**Text Recognition (OCR)** \
 Text Rekognition is done using Mobile vision API. so, when user want to scan the aadhar card he can automatically get the code
-
-**Online Cloud**
+ 
+**Online Cloud** \
 we used firebase database for online cloud, if the user lost the documents also he can retrive all of them with no time
 
-**File compression**
+**File compression** \
 With the help of openCV 3.0 we added the compressor, user can compress the doument with the given input 
 
 ___
@@ -49,12 +45,8 @@ ___
 ___
 # Developers :information_desk_person:
 
-[Ajay Prabhakar](https://github.com/chromicle)
-
-[Puneeth chanda](https://github.com/puneeth2001)
-
-[Ashwin Ramakrishnan](https://github.com/ashwinkey04)
-
-[Akshay Praveen Nair](https://github.com/iammarco11)
-
+[Ajay Prabhakar](https://github.com/chromicle) \
+[Puneeth chanda](https://github.com/puneeth2001) \
+[Ashwin Ramakrishnan](https://github.com/ashwinkey04) \
+[Akshay Praveen Nair](https://github.com/iammarco11) \
 [Nehal Nevle](https://github.com/Blackcipher101)
