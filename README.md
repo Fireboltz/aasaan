@@ -41,12 +41,41 @@ With the help of openCV 3.0 we added the compressor, user can compress the doume
 **Multipule Formats** \
 The scanned image can be converted into multipule forms JPG, PDF, TiFF etc
 
-##### How is privacy ensured? 
+### How is privacy ensured? 
 All files being stored in Firebase cloud, no one except with user authentication would be able to read them. 
 For further clarification, when ever the user upload or download the documents it will automatically check the authentication  
 
-#### 
-___
+### How to build and run locally 
+Install [Flutter](https://flutter.dev) and all required dev tools.
+
+Fetch this repository and navigate to the project directory.
+
+```
+cd scanbot-sdk-example-flutter/
+```
+Fetch and install the dependencies of this example project via Flutter CLI:
+
+```
+flutter pub get
+```
+Connect a mobile device via USB and run the app.
+
+**Android:** 
+```
+flutter run -d <DEVICE_ID>
+```
+You can get the IDs of all connected devices via `flutter devices`.
+
+**iOS:** 
+Install Pods dependencies:
+```
+cd ios/
+pod install --repo-update
+```
+
+Open the **workspace**(!) `ios/Runner.xcworkspace` in Xcode and adjust the *Signing / Developer Account* settings. 
+Then build and run the app in Xcode.
+
 ## Screenshots
 ___
 ## Developers :information_desk_person:
