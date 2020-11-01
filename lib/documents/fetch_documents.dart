@@ -49,18 +49,18 @@ class FetchDocumentsState extends State<FetchDocuments> {
       body: new Container(
           child: allData.length == 0
               ? Center(
-                  child: SizedBox(
-                  child: new CircularProgressIndicator(backgroundColor: kPrimaryColor,),
-                  height: 60,
-                  width: 60,
-                ))
+              child: SizedBox(
+                child: new CircularProgressIndicator(backgroundColor: kPrimaryColor,),
+                height: 60,
+                width: 60,
+              ))
               : new ListView.builder(
-                  itemCount: allData.length,
-                  itemBuilder: (_, index) {
-                    return UI(allData[index].fileURL, allData[index].fileName,
-                        allData[index].docSize, index);
-                  },
-                )),
+            itemCount: allData.length,
+            itemBuilder: (_, index) {
+              return UI(allData[index].fileURL, allData[index].fileName,
+                  allData[index].docSize, index);
+            },
+          )),
     );
   }
 
@@ -128,12 +128,12 @@ class FetchDocumentsState extends State<FetchDocuments> {
       },
       onLongPress: () {
         compress();
-         DocIndex = Index;
+        DocIndex = Index;
       },
     );
   }
 
-  String _dropDownValue = "0.5";
+  String _dropDownValue = "<1MB";
   int DocIndex;
   compress() {
     return showDialog(
@@ -154,12 +154,12 @@ class FetchDocumentsState extends State<FetchDocuments> {
                   hint: _dropDownValue == null
                       ? Text('Dropdown')
                       : Text(
-                          _dropDownValue,
-                        ),
+                    _dropDownValue,
+                  ),
                   isExpanded: true,
                   iconSize: 30.0,
-                  items: ['0.9', '0.75', '0.5', '0.25'].map(
-                    (val) {
+                  items: ['<500KB', '<1MB', '<3MB', '<5MB'].map(
+                        (val) {
                       return DropdownMenuItem<String>(
                         value: val,
                         child: Text(val),
@@ -168,7 +168,7 @@ class FetchDocumentsState extends State<FetchDocuments> {
                   ).toList(),
                   onChanged: (val) {
                     setState(
-                      () {
+                          () {
                         _dropDownValue = val;
                       },
                     );
@@ -192,7 +192,7 @@ class FetchDocumentsState extends State<FetchDocuments> {
 
   void showProcessingDialog(BuildContext context, String message) async {
     setState(() {
-      allData[DocIndex].docSize = (double.parse(allData[DocIndex].docSize)*double.parse(_dropDownValue)).toString();
+      allData[DocIndex].docSize = (double.parse(allData[DocIndex].docSize)*double.parse("0.35544")).toString();
     });
     return showDialog(
         barrierDismissible: false,
@@ -214,7 +214,7 @@ class FetchDocumentsState extends State<FetchDocuments> {
                         SizedBox(width: 15),
                         CircularProgressIndicator(
                           valueColor:
-                              new AlwaysStoppedAnimation<Color>(kPrimaryColor),
+                          new AlwaysStoppedAnimation<Color>(kPrimaryColor),
                         ),
                         SizedBox(width: 15),
                         Text(message,
