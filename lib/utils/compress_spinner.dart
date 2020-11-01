@@ -7,7 +7,7 @@ class CompressSpinner extends StatefulWidget {
 }
 
 class _CompressSpinnerState extends State<CompressSpinner> {
-  var treesList = ['<500KB', '<1MB', '<3MB', '<5MB'];
+  var treesList = ['<100KB', '<500KB', '<1MB', '<3MB', '<5MB'];
 
   @override
   Widget build(BuildContext context) {
