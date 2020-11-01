@@ -1,17 +1,18 @@
-# Scanbot SDK Example Flutter
+# Facilitation of Document Upload
+___
+## What problem do we solve :eyes:
 
-This example app shows how to integrate the [Scanbot SDK Flutter Plugin](https://pub.dev/packages/scanbot_sdk) on Android and iOS.
+* Making the uploading of documents etc. In online applications a piece of cake.
+* This we are achieving by able to redirect to an app once the user clicks the upload button.
+* From the app the users can take a photo of the desired documents and can upload it to the required component. by compressing it to the **required** size
 
-For more details about the Plugin please see this [documentation](https://scanbotsdk.github.io/documentation/flutter/).
+___
+## Technology Stack :star:
 
-
-## What is Scanbot SDK?
-
-The Scanbot SDK brings scanning and document creation capabilities to your mobile apps. 
-It contains modules which are individually licensable as license packages. 
-For more details visit our website https://scanbot.io
-
-
+* [Flutter](https://flutter.dev/)
+* [Firebase](https://firebase.google.com/)
+* [React](https://reactjs.org/)
+___
 ## How to run this app
 
 Install [Flutter](https://flutter.dev) and all required dev tools.
@@ -49,3 +50,15 @@ pod install --repo-update
 
 Open the **workspace**(!) `ios/Runner.xcworkspace` in Xcode and adjust the *Signing / Developer Account* settings. 
 Then build and run the app in Xcode.
+
+# Developers :information_desk_person:
+
+[Ajay Prabhakar](https://github.com/Chromicle)
+
+[Ashwin](https://github.com/ashwinkey04)
+
+[Puneeth](https://github.com/puneeth2001)
+
+[AKashay](https://github.com/iammarco11)
+
+[Nehal](https://github.com/Blackcipher101)
