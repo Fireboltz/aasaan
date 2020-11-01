@@ -33,7 +33,7 @@ class PageOperations extends StatelessWidget {
                 child: GestureDetector(
                   onTap: () {},
                   child: Icon(
-                      Icons.compress
+                      Icons.compare_arrows
                   ),
                 )
             ),

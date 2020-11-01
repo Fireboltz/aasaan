@@ -26,6 +26,16 @@
                     android:name="io.flutter.embedding.android.SplashScreenDrawable"
                     android:resource="@drawable/launch_background" />
             <intent-filter>
+                <data
+                    android:host="blissful-neumann-0ff4dd.netlify.app/"
+                    android:pathPrefix="/openmyapp"
+                    android:scheme="https" >
+                </data>
+
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>

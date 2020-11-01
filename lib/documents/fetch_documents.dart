@@ -31,25 +31,34 @@ class FetchDocumentsState extends State<FetchDocuments> {
       "https://avatars1.githubusercontent.com/u/48018942?v=4";
 
   FetchDocumentsState(this.appBarTitle);
+
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      appBar: AppBar(title: Text(this.appBarTitle)),
+      appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: Colors.black, //change your color here
+        ),
+        backgroundColor: Colors.white,
+        title: const Text('Fetch Documents',
+            style: TextStyle(inherit: true, color: Colors.black)),
+      ),
       body: new Container(
           child: allData.length == 0
               ? Center(
                   child: SizedBox(
-                  child: new CircularProgressIndicator(),
+                  child: new CircularProgressIndicator(backgroundColor: kPrimaryColor,),
                   height: 60,
                   width: 60,
                 ))
               : new ListView.builder(
                   itemCount: allData.length,
                   itemBuilder: (_, index) {
-                    return UI(allData[index].fileURL, allData[index].fileName);
+                    return UI(allData[index].fileURL, allData[index].fileName,
+                        allData[index].docSize, index);
                   },
                 )),
     );
@@ -65,8 +74,8 @@ class FetchDocumentsState extends State<FetchDocuments> {
       var data = snap.value;
       allData.clear();
       for (var key in keys) {
-        DocumentModel d =
-            new DocumentModel(data[key]['Name'], data[key]['PDF']);
+        DocumentModel d = new DocumentModel(
+            data[key]['Name'], data[key]['PDF'], data[key]['Lemgth']);
         allData.add(d);
       }
       setState(() {
@@ -75,7 +84,8 @@ class FetchDocumentsState extends State<FetchDocuments> {
     });
   }
 
-  Widget UI(String fileName, String fileURL) {
+  Widget UI(String fileName, String fileURL, String docSize, int Index) {
+    String size = (double.parse(docSize)*0.000001).toString();
     return InkWell(
       child: new Card(
         elevation: 10.0,
@@ -97,6 +107,13 @@ class FetchDocumentsState extends State<FetchDocuments> {
                     'Description : This is the doc of my certificate',
                     style: Theme.of(context).textTheme.body2,
                   ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  new Text(
+                    'Size : $size MB',
+                    style: Theme.of(context).textTheme.body2,
+                  ),
                 ],
               ),
               SizedBox(
@@ -111,12 +128,13 @@ class FetchDocumentsState extends State<FetchDocuments> {
       },
       onLongPress: () {
         compress();
+         DocIndex = Index;
       },
     );
   }
 
-  String _dropDownValue ="0.8";
-
+  String _dropDownValue = "0.5";
+  int DocIndex;
   compress() {
     return showDialog(
         barrierDismissible: false,
@@ -136,12 +154,12 @@ class FetchDocumentsState extends State<FetchDocuments> {
                   hint: _dropDownValue == null
                       ? Text('Dropdown')
                       : Text(
-                    _dropDownValue,
-                  ),
+                          _dropDownValue,
+                        ),
                   isExpanded: true,
                   iconSize: 30.0,
                   items: ['0.9', '0.75', '0.5', '0.25'].map(
-                        (val) {
+                    (val) {
                       return DropdownMenuItem<String>(
                         value: val,
                         child: Text(val),
@@ -150,7 +168,7 @@ class FetchDocumentsState extends State<FetchDocuments> {
                   ).toList(),
                   onChanged: (val) {
                     setState(
-                          () {
+                      () {
                         _dropDownValue = val;
                       },
                     );
@@ -165,15 +183,17 @@ class FetchDocumentsState extends State<FetchDocuments> {
                 onPressed: () {
                   Navigator.pop(context);
                   showProcessingDialog(context, "Compressing the File");
-                  },
+                },
               ),
             ],
           );
         });
   }
 
-
-  static void showProcessingDialog(BuildContext context, String message) async {
+  void showProcessingDialog(BuildContext context, String message) async {
+    setState(() {
+      allData[DocIndex].docSize = (double.parse(allData[DocIndex].docSize)*double.parse(_dropDownValue)).toString();
+    });
     return showDialog(
         barrierDismissible: false,
         context: context,
@@ -194,7 +214,7 @@ class FetchDocumentsState extends State<FetchDocuments> {
                         SizedBox(width: 15),
                         CircularProgressIndicator(
                           valueColor:
-                          new AlwaysStoppedAnimation<Color>(kPrimaryColor),
+                              new AlwaysStoppedAnimation<Color>(kPrimaryColor),
                         ),
                         SizedBox(width: 15),
                         Text(message,
@@ -205,9 +225,9 @@ class FetchDocumentsState extends State<FetchDocuments> {
         });
   }
 
-
   _createSnackBar() {
-    _scaffoldKey.currentState.showSnackBar(new SnackBar(content: new Text("File compressed")));
+    _scaffoldKey.currentState
+        .showSnackBar(new SnackBar(content: new Text("File compressed")));
   }
 }
 
@@ -222,7 +242,7 @@ _launchURL(String url) async {
 class DocumentModel {
   String fileURL;
   String fileName;
+  String docSize;
 
-  DocumentModel(this.fileURL, this.fileName);
+  DocumentModel(this.fileURL, this.fileName, this.docSize);
 }
-

@@ -364,6 +364,7 @@ class PagesPreviewWidgetState extends State<PagesPreviewWidget> {
   }
 
   final mainReference = FirebaseDatabase.instance.reference().child('Database');
+  String sizeofDoc;
 
   Future getPdfAndUpload(Uri pdfFileUri) async {
     var rng = new Random();
@@ -373,6 +374,7 @@ class PagesPreviewWidgetState extends State<PagesPreviewWidget> {
       randomName += rng.nextInt(100).toString();
     }
     File file = File(pdfFileUri.path);
+    sizeofDoc = file.lengthSync().toString();
     String fileName = '${randomName}.pdf';
     print(fileName);
     print('${file.readAsBytesSync()}');
@@ -408,9 +410,10 @@ class PagesPreviewWidgetState extends State<PagesPreviewWidget> {
   }
 
   void documentFileUpload(String str, DatabaseReference mainReference) {
-      var data = {
+    var data = {
         "PDF": str,
-        "Name": "test"
+        "Name": "test",
+        "Lemgth": sizeofDoc
       };
       mainReference.child("Documents").push().set(data).then((v) {});
   }
